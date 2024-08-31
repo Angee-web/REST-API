@@ -1,7 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const db = require("./db");
-const User = require("./models/User");
+const User = require("./models/User.js");
 
 dotenv.config();
 
@@ -16,11 +16,12 @@ app.get("/api/v1/getUsers", async (req, res) => {
   try {
     const users = await User.find();
     if (!users) {
-        return res.status(404).json({
-          status: "fail",
-          message: "User not found",
-        });
-      }
+      return res.status(404).json({
+        status: "fail",
+        message: "User not found",
+      });
+    }
+    console.log(users);
     res.status(200).json({
       status: "success",
       message: "Users retrieved successfully",
